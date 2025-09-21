@@ -1,47 +1,97 @@
 import React, { useEffect, useState } from 'react';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import StoreHeader from '../header/StoreHeader';
 import './Home.css';
+import { fetchProductsFromAPI } from './FetchProducts';
 
 const Home = () => {
   const [products, setProducts] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [showFilters, setShowFilters] = useState(false);
 
-  const itemsPerPage = 10;
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
 
-  const fetchProducts = async (page) => {
-    setLoading(true);
-    try {
-      const token = localStorage.getItem('token');
+  const currentPage = parseInt(searchParams.get('page')) || 1;
+  const priceFrom = searchParams.get('filter[price_from]') || '';
+  const priceTo = searchParams.get('filter[price_to]') || '';
+  const sortBy = searchParams.get('sort') || '';
 
-      const res = await fetch(
-        `https://api.redseam.redberryinternship.ge/api/products?page=${page}`,
-        {
-          headers: {
-            Accept: 'application/json',
-            Authorization: `Bearer ${token}`
-          }
-        }
-      );
+  const [minInput, setMinInput] = useState(priceFrom);
+  const [maxInput, setMaxInput] = useState(priceTo);
+  const [selectedSort, setSelectedSort] = useState(sortBy);
 
-      if (!res.ok) throw new Error('Failed to fetch products');
+  const [showSortOptions, setShowSortOptions] = useState(false);
 
-      const data = await res.json();
-      setProducts(data.data);
-      setTotalPages(data.meta.last_page);
-      setTotalItems(data.meta.total);
-    } catch (err) {
-      console.error('API Error:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   useEffect(() => {
-    fetchProducts(currentPage);
-  }, [currentPage]);
+    const fetchProducts = async () => {
+      setLoading(true);
+      try {
+        const result = await fetchProductsFromAPI({
+          page: currentPage,
+          priceFrom,
+          priceTo,
+          sortBy,
+        });
+        setProducts(result.products);
+        setTotalPages(result.totalPages);
+        setTotalItems(result.totalItems);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, [currentPage, priceFrom, priceTo, sortBy]);
+
+  const applyFilters = () => {
+    const params = new URLSearchParams();
+    if (minInput) params.set('filter[price_from]', minInput);
+    if (maxInput) params.set('filter[price_to]', maxInput);
+    if (selectedSort) params.set('sort', selectedSort);
+    params.set('page', 1);
+    setSearchParams(params);
+
+    // Hide filter panel
+    setShowFilters(false);
+    // Clear inputs
+    setMinInput('');
+    setMaxInput('');
+  };
+
+
+  const goToPage = (page) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set('page', page);
+    setSearchParams(params);
+  };
+
+  const handleSortChange = (sortValue) => {
+    setSelectedSort(sortValue);
+    const params = new URLSearchParams(searchParams.toString());
+    if (sortValue) {
+      params.set('sort', sortValue);
+    } else {
+      params.delete('sort');
+    }
+    params.set('page', 1);
+    setSearchParams(params);
+  };
+
+  const removeAllPriceFilters = () => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete('filter[price_from]');
+    params.delete('filter[price_to]');
+    setMinInput('');
+    setMaxInput('');
+    params.set('page', 1);
+    setSearchParams(params);
+  };
 
   const renderPageNumbers = () => {
     const pages = [];
@@ -50,7 +100,7 @@ const Home = () => {
         <button
           key={i}
           className={i === currentPage ? 'active' : ''}
-          onClick={() => setCurrentPage(i)}
+          onClick={() => goToPage(i)}
         >
           {i}
         </button>
@@ -59,63 +109,206 @@ const Home = () => {
     return pages;
   };
 
-  const startItem = (currentPage - 1) * itemsPerPage + 1;
-  const endItem = Math.min(currentPage * itemsPerPage, totalItems);
+  const startItem = (currentPage - 1) * 10 + 1;
+  const endItem = Math.min(currentPage * 10, totalItems);
 
   return (
     <>
       <StoreHeader />
       <section className='store'>
-        <div>
-          <div className="filters">
-            <h2>Products</h2>
-            <div className="filterItems">
+        <div className="filters">
+          <h2>Products</h2>
+          <div className="groupFilters">
+            <div className="pageCount">
               <p className='pages'>
                 Showing {startItem} - {endItem} of {totalItems} results
               </p>
-              <div className="line"></div>
-              <div className="filterPrice">
-                <img src="adjustments-horizontal.svg" alt="" />
+            </div>
+
+            {/* FILTER TOGGLE */}
+            <div className="pricerange">
+              <div
+                className="align"
+                onClick={() => setShowFilters(!showFilters)}
+                style={{ cursor: 'pointer' }}
+              >
+                <img src="adjustments-horizontal.svg" alt="filter" />
                 <p>Filter</p>
               </div>
-              <div className="sort">
-                <p>Sort by</p>
-                <img src="vec2.svg" alt="vector" />
-              </div>
-            </div>
-          </div>
 
-          {loading ? (
-            <p>Loading products...</p>
-          ) : (
-            <div className='content'>
-              {products.map(product => (
-                <div key={product.id} className='item'>
-                  <img src={product.cover_image} alt={product.name} />
-                  <p>{product.name}</p>
-                  <p>{product.price} ₾</p>
+              {/* PRICE FILTER (TOGGLED) */}
+              {showFilters && (
+                <div className='priceFilter'>
+                  <h3>Select price</h3>
+                  <div className="priceInputs">
+                    <input
+                      type="number"
+                      value={minInput}
+                      onChange={(e) => setMinInput(e.target.value)}
+                      placeholder="From *"
+                      min="0"
+                    />
+                    <input
+                      type="number"
+                      value={maxInput}
+                      onChange={(e) => setMaxInput(e.target.value)}
+                      placeholder="To *"
+                      min="0"
+                    />
+                  </div>
+                  <div className="btn">
+                    <button onClick={applyFilters}>Apply Filters</button>
+                  </div>
                 </div>
-              ))}
+              )}
             </div>
-          )}
 
-          <div className="pagination">
-            <button
-              onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-              disabled={currentPage === 1}
-            >
-              ‹ Prev
-            </button>
+            <div className="sortitem">
+              {/* Selected sort label (acts like dropdown button) */}
+              <div
+                className="sort-selected"
+                onClick={() => setShowSortOptions(!showSortOptions)}
 
-            {renderPageNumbers()}
+              >
+                {selectedSort === '' && 'Sort by'}
+                {selectedSort === '-created_at' && 'New products first'}
+                {selectedSort === 'price' && 'Price, low to high'}
+                {selectedSort === '-price' && 'Price, high to low'}
+              </div>
 
-            <button
-              onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-              disabled={currentPage === totalPages}
-            >
-              Next ›
-            </button>
+              {/* Sort options - only visible when showSortOptions is true */}
+              {showSortOptions && (
+                <div
+                  className="sort-options"
+                >
+                  <div
+                    className={selectedSort === '' ? 'active' : ''}
+                    onClick={() => {
+                      handleSortChange('');
+                      setShowSortOptions(false);
+                    }}
+
+                  >
+                    Sort by
+                  </div>
+                  <div
+                    className={selectedSort === '-created_at' ? 'active' : ''}
+                    onClick={() => {
+                      handleSortChange('-created_at');
+                      setShowSortOptions(false);
+                    }}
+
+                  >
+                    New products first
+                  </div>
+                  <div
+                    className={selectedSort === 'price' ? 'active' : ''}
+                    onClick={() => {
+                      handleSortChange('price');
+                      setShowSortOptions(false);
+                    }}
+
+                  >
+                    Price, low to high
+                  </div>
+                  <div
+                    className={selectedSort === '-price' ? 'active' : ''}
+                    onClick={() => {
+                      handleSortChange('-price');
+                      setShowSortOptions(false);
+                    }}
+
+                  >
+                    Price, high to low
+                  </div>
+                </div>
+              )}
+            </div>
+
+
           </div>
+        </div>
+
+        {/* Active Price Filters below products */}
+        <div className="active-filters" style={{ margin: '20px 0' }}>
+          {(priceFrom || priceTo) && (
+            <>
+              <h4>Active Price Filters:</h4>
+              <div
+                className="filter-tags"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '10px',
+                  background: '#eee',
+                  padding: '5px 10px',
+                  borderRadius: '20px',
+                  maxWidth: 'fit-content',
+                }}
+              >
+                <div
+                  className="filter-tag"
+                  style={{ display: 'flex', alignItems: 'center', gap: '5px' }}
+                >
+                  {priceFrom && <>From: {priceFrom} ₾</>}
+                  {priceFrom && priceTo && <> - </>}
+                  {priceTo && <>To: {priceTo} ₾</>}
+                  <button
+                    onClick={removeAllPriceFilters}
+                    style={{
+                      marginLeft: '10px',
+                      border: 'none',
+                      background: 'transparent',
+                      cursor: 'pointer',
+                      fontSize: '18px',
+                      lineHeight: '1',
+                    }}
+                    aria-label="Remove price filters"
+                  >
+                    ×
+                  </button>
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+
+        {loading ? (
+          <p>Loading products...</p>
+        ) : (
+          <div className='content'>
+            {products.map((product) => (
+              <div
+                key={product.id}
+                className='item'
+                onClick={() => navigate(`/products/${product.id}`)}
+                style={{ cursor: 'pointer' }}
+              >
+                <img src={product.cover_image} alt={product.name} />
+                <p>{product.name}</p>
+                <p>{product.price} ₾</p>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* PAGINATION */}
+        <div className="pagination" style={{ marginTop: '20px' }}>
+          <button
+            onClick={() => currentPage > 1 && goToPage(currentPage - 1)}
+            disabled={currentPage === 1}
+            style={{ marginRight: '5px' }}
+          >
+            Previous
+          </button>
+          {renderPageNumbers()}
+          <button
+            onClick={() => currentPage < totalPages && goToPage(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            style={{ marginLeft: '5px' }}
+          >
+            Next
+          </button>
         </div>
       </section>
     </>
@@ -123,5 +316,3 @@ const Home = () => {
 };
 
 export default Home;
-
-
