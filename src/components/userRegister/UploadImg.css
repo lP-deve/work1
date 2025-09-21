@@ -1,0 +1,49 @@
+.profile-uploader {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  gap:15px;
+  width: 100%;
+  margin-bottom: 46px;
+  margin-top: 48px;
+}
+
+.profile-image {
+  width: 100px;
+  height:100px;
+  border-radius: 50%;
+  object-fit: cover;
+
+}
+
+.actions{
+  display: flex;
+  align-items: center;
+  gap:15px;
+}
+
+.upload-label {
+  cursor: pointer;
+ font-family: Poppins;
+font-weight: 400;
+font-style: Regular;
+font-size: 14px;
+color: #3E424A;
+line-height: 100%;
+letter-spacing: 0%;
+text-align: center;
+
+}
+
+.remove-button {
+  cursor: pointer;
+  font-family: Poppins;
+font-weight: 400;
+font-style: Regular;
+font-size: 14px;
+color: #3E424A;
+line-height: 100%;
+letter-spacing: 0%;
+text-align: center;
+
+}

@@ -1,0 +1,18 @@
+.login h1{
+    margin-bottom: 48px;
+}
+#hide2{
+position: absolute;
+width: 20px;
+height: 20px;
+top:37%;
+right:3%;
+}
+
+#see2{
+position: absolute;
+width: 20px;
+height: 20px;
+top:37%;
+right:3%;
+}
