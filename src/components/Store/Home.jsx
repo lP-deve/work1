@@ -9,29 +9,24 @@ const Home = () => {
   const [totalItems, setTotalItems] = useState(0);
   const [loading, setLoading] = useState(false);
 
-  const pagesPerGroup = 10;
   const itemsPerPage = 10;
-
-  const currentGroup = Math.floor((currentPage - 1) / pagesPerGroup);
 
   const fetchProducts = async (page) => {
     setLoading(true);
     try {
-      const token = localStorage.getItem('token'); // ✅ Get token from localStorage
+      const token = localStorage.getItem('token');
 
       const res = await fetch(
         `https://api.redseam.redberryinternship.ge/api/products?page=${page}`,
         {
           headers: {
             Accept: 'application/json',
-            Authorization: `Bearer ${token}` // ✅ Add Authorization header
+            Authorization: `Bearer ${token}`
           }
         }
       );
 
-      if (!res.ok) {
-        throw new Error('Failed to fetch products');
-      }
+      if (!res.ok) throw new Error('Failed to fetch products');
 
       const data = await res.json();
       setProducts(data.data);
@@ -44,17 +39,13 @@ const Home = () => {
     }
   };
 
-
   useEffect(() => {
     fetchProducts(currentPage);
   }, [currentPage]);
 
   const renderPageNumbers = () => {
-    const startPage = currentGroup * pagesPerGroup + 1;
-    const endPage = Math.min(startPage + pagesPerGroup - 1, totalPages);
     const pages = [];
-
-    for (let i = startPage; i <= endPage; i++) {
+    for (let i = 1; i <= totalPages; i++) {
       pages.push(
         <button
           key={i}
@@ -65,22 +56,7 @@ const Home = () => {
         </button>
       );
     }
-
     return pages;
-  };
-
-  const handleNextGroup = () => {
-    const nextGroupStart = (currentGroup + 1) * pagesPerGroup + 1;
-    if (nextGroupStart <= totalPages) {
-      setCurrentPage(nextGroupStart);
-    }
-  };
-
-  const handlePrevGroup = () => {
-    const prevGroupStart = (currentGroup - 1) * pagesPerGroup + 1;
-    if (prevGroupStart > 0) {
-      setCurrentPage(prevGroupStart);
-    }
   };
 
   const startItem = (currentPage - 1) * itemsPerPage + 1;
@@ -125,19 +101,19 @@ const Home = () => {
 
           <div className="pagination">
             <button
-              onClick={handlePrevGroup}
-              disabled={currentGroup === 0}
+              onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
             >
-              ‹ Prev 10
+              ‹ Prev
             </button>
 
             {renderPageNumbers()}
 
             <button
-              onClick={handleNextGroup}
-              disabled={(currentGroup + 1) * pagesPerGroup >= totalPages}
+              onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+              disabled={currentPage === totalPages}
             >
-              Next 10 ›
+              Next ›
             </button>
           </div>
         </div>
@@ -147,3 +123,5 @@ const Home = () => {
 };
 
 export default Home;
+
+
