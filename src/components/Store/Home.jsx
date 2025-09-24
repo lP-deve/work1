@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useSearchParams, useNavigate, Link } from 'react-router-dom';
 import StoreHeader from '../header/StoreHeader';
 import './Home.css';
 import { fetchProductsFromAPI } from './FetchProducts';
+
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -24,7 +25,6 @@ const Home = () => {
   const [selectedSort, setSelectedSort] = useState(sortBy);
 
   const [showSortOptions, setShowSortOptions] = useState(false);
-
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -57,13 +57,10 @@ const Home = () => {
     params.set('page', 1);
     setSearchParams(params);
 
-    // Hide filter panel
     setShowFilters(false);
-    // Clear inputs
     setMinInput('');
     setMaxInput('');
   };
-
 
   const goToPage = (page) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -93,19 +90,72 @@ const Home = () => {
     setSearchParams(params);
   };
 
+  
   const renderPageNumbers = () => {
     const pages = [];
-    for (let i = 1; i <= totalPages; i++) {
-      pages.push(
-        <button
-          key={i}
-          className={i === currentPage ? 'active' : ''}
-          onClick={() => goToPage(i)}
-        >
-          {i}
-        </button>
-      );
+    const maxPagesToShow = 2;
+
+    if (totalPages <= 7) {
+      for (let i = 1; i <= totalPages; i++) {
+        pages.push(
+          <button
+            key={i}
+            className={`pagination-button ${i === currentPage ? 'active' : ''}`}
+            onClick={() => goToPage(i)}
+          >
+            {i}
+          </button>
+        );
+      }
+    } else {
+      for (let i = 1; i <= maxPagesToShow; i++) {
+        pages.push(
+          <button
+            key={i}
+            className={`pagination-button ${i === currentPage ? 'active' : ''}`}
+            onClick={() => goToPage(i)}
+          >
+            {i}
+          </button>
+        );
+      }
+
+      if (currentPage > maxPagesToShow + 2) {
+        pages.push(<span key="dots-start">...</span>);
+      }
+
+      const start = Math.max(currentPage - 1, maxPagesToShow + 1);
+      const end = Math.min(currentPage + 1, totalPages - maxPagesToShow);
+
+      for (let i = start; i <= end; i++) {
+        pages.push(
+          <button
+            key={i}
+            className={`pagination-button ${i === currentPage ? 'active' : ''}`}
+            onClick={() => goToPage(i)}
+          >
+            {i}
+          </button>
+        );
+      }
+
+      if (currentPage < totalPages - (maxPagesToShow + 1)) {
+        pages.push(<span key="dots-end">...</span>);
+      }
+
+      for (let i = totalPages - maxPagesToShow + 1; i <= totalPages; i++) {
+        pages.push(
+          <button
+            key={i}
+            className={`pagination-button ${i === currentPage ? 'active' : ''}`}
+            onClick={() => goToPage(i)}
+          >
+            {i}
+          </button>
+        );
+      }
     }
+
     return pages;
   };
 
@@ -125,7 +175,6 @@ const Home = () => {
               </p>
             </div>
 
-            {/* FILTER TOGGLE */}
             <div className="pricerange">
               <div
                 className="align"
@@ -136,7 +185,6 @@ const Home = () => {
                 <p>Filter</p>
               </div>
 
-              {/* PRICE FILTER (TOGGLED) */}
               {showFilters && (
                 <div className='priceFilter'>
                   <h3>Select price</h3>
@@ -164,11 +212,9 @@ const Home = () => {
             </div>
 
             <div className="sortitem">
-              {/* Selected sort label (acts like dropdown button) */}
               <div
                 className="sort-selected"
                 onClick={() => setShowSortOptions(!showSortOptions)}
-
               >
                 {selectedSort === '' && 'Sort by'}
                 {selectedSort === '-created_at' && 'New products first'}
@@ -176,18 +222,14 @@ const Home = () => {
                 {selectedSort === '-price' && 'Price, high to low'}
               </div>
 
-              {/* Sort options - only visible when showSortOptions is true */}
               {showSortOptions && (
-                <div
-                  className="sort-options"
-                >
+                <div className="sort-options">
                   <div
                     className={selectedSort === '' ? 'active' : ''}
                     onClick={() => {
                       handleSortChange('');
                       setShowSortOptions(false);
                     }}
-
                   >
                     Sort by
                   </div>
@@ -197,7 +239,6 @@ const Home = () => {
                       handleSortChange('-created_at');
                       setShowSortOptions(false);
                     }}
-
                   >
                     New products first
                   </div>
@@ -207,7 +248,6 @@ const Home = () => {
                       handleSortChange('price');
                       setShowSortOptions(false);
                     }}
-
                   >
                     Price, low to high
                   </div>
@@ -217,34 +257,22 @@ const Home = () => {
                       handleSortChange('-price');
                       setShowSortOptions(false);
                     }}
-
                   >
                     Price, high to low
                   </div>
                 </div>
               )}
             </div>
-
-
           </div>
         </div>
 
-        {/* Active Price Filters below products */}
         <div className="active-filters" style={{ margin: '20px 0' }}>
           {(priceFrom || priceTo) && (
             <>
               <h4>Active Price Filters:</h4>
               <div
                 className="filter-tags"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '10px',
-                  background: '#eee',
-                  padding: '5px 10px',
-                  borderRadius: '20px',
-                  maxWidth: 'fit-content',
-                }}
+          
               >
                 <div
                   className="filter-tag"
@@ -255,14 +283,7 @@ const Home = () => {
                   {priceTo && <>To: {priceTo} ₾</>}
                   <button
                     onClick={removeAllPriceFilters}
-                    style={{
-                      marginLeft: '10px',
-                      border: 'none',
-                      background: 'transparent',
-                      cursor: 'pointer',
-                      fontSize: '18px',
-                      lineHeight: '1',
-                    }}
+                    
                     aria-label="Remove price filters"
                   >
                     ×
@@ -278,36 +299,32 @@ const Home = () => {
         ) : (
           <div className='content'>
             {products.map((product) => (
-              <div
-                key={product.id}
-                className='item'
-                onClick={() => navigate(`/products/${product.id}`)}
-                style={{ cursor: 'pointer' }}
-              >
+             <Link to={`/products/${product.id}`} key={product.id} className="product-card"> <div className='item'>
                 <img src={product.cover_image} alt={product.name} />
-                <p>{product.name}</p>
-                <p>{product.price} ₾</p>
-              </div>
+               <p className="productName">{product.name}</p>
+                <p className='priceProduct'>{product.price} ₾</p>
+              </div></Link>
             ))}
+
           </div>
         )}
 
-        {/* PAGINATION */}
-        <div className="pagination" style={{ marginTop: '20px' }}>
+        <div className="pagination">
           <button
             onClick={() => currentPage > 1 && goToPage(currentPage - 1)}
             disabled={currentPage === 1}
-            style={{ marginRight: '5px' }}
+            className="navigBtn"
           >
-            Previous
+            <img src="Vector 4 (Stroke).svg" alt="" />
           </button>
+
           {renderPageNumbers()}
           <button
             onClick={() => currentPage < totalPages && goToPage(currentPage + 1)}
             disabled={currentPage === totalPages}
-            style={{ marginLeft: '5px' }}
+            className="navigBtn"
           >
-            Next
+            <img src="verctor.svg" alt="" />
           </button>
         </div>
       </section>

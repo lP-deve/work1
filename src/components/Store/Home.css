@@ -1,9 +1,8 @@
 .content {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr; 
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 24px;
   max-width: 412px;
-
 }
 
 .item {
@@ -13,180 +12,241 @@
   justify-content: center;
 }
 
+h2{
+ font-family: Poppins;
+font-weight: 600;
+font-style: SemiBold;
+font-size: 42px;
+color:#10151F;
+line-height: 100%;
+letter-spacing: 0%;
+  
+}
 
 .item p {
   width: 300px;
   font-family: Poppins;
-font-weight: 500;
-font-style: Medium;
-font-size: 18px;
-line-height: 100%;
-letter-spacing: 0%;
-color:#10151F;
-margin-top: 12px;
-margin-bottom: 48px;
-
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 18px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #10151f;
+  margin-top: 12px;
+  margin-bottom: 48px;
 }
 
 .item img {
-max-width: 412px;
+  max-width: 412px;
   height: 549px;
   object-fit: cover;
-  border: 1px solid grey;
+ border-radius: 10px;
+ border:1px solid grey;
 }
 
-.store{
-    width: 1720px;
-    margin:0 auto;
+.store {
+  width: 1720px;
+  margin: 0 auto;
 }
 
 .plagination {
-    display: flex;
-    gap:12px;
-    margin-top: 100px;
-    margin-bottom: 216px;
-
+  display: flex;
+  gap: 12px;
+  margin-top: 100px;
+  margin-bottom: 216px;
 }
-.pages{
+.pages {
+  font-family: Poppins;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #3e424a;
+}
+
+.filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  position: relative;
+}
+
+.align {
+  display: flex;
+  gap: 12px;
+  align-self: center;
+}
+
+.priceFilter {
+  max-width: 392px;
+}
+.priceInputs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.priceFilter button {
+  width: 124;
+  height: 41;
+  gap: 10px;
+  background-color: #ff4000;
+  color: white;
+  opacity: 1;
+  border-radius: 10px;
+  padding-top: 10px;
+  padding-right: 20px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+}
+.btn {
+  display: flex;
+  align-items: end;
+  justify-self: end;
+}
+
+.priceFilter {
+  border: 1px solid #e1dfe1;
+  width: 392;
+  height: 169;
+  gap: 20px;
+  background-color: white;
+  opacity: 1;
+  top: 205px;
+  left: 1332px;
+  border-width: 1px;
+  border-radius: 8px;
+  padding: 16px;
+  position: absolute;
+  top: 120%;
+  left: 68%;
+}
+.pricerange h3 {
+  font-family: Poppins;
+  font-weight: 600;
+  font-style: SemiBold;
+  font-size: 16px;
+  color: #10151f;
+  margin-bottom: 20px;
+  line-height: 100%;
+  letter-spacing: 0%;
+}
+.filters {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.groupFilters {
+  display: flex;
+}
+
+.pageCount {
+  width: 190px;
+  border-right: 1px solid #e1dfe1;
+  margin-right: 32px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+.align {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-right: 32px;
+}
+.groupFilters {
+  display: flex;
+  align-items: center;
+}
+
+.sort-options {
+  width: 223;
+  height: 184;
+  opacity: 1;
+  gap: 8px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  top: 205px;
+  left: 1597px;
+  border-radius: 8px;
+  border-width: 1px;
+  background-color: white;
+  top: 120%;
+  left: 91%;
+  border: 1px solid #e1dfe1;
+  position: absolute;
+}
+.sort-options div {
+  width: 223;
+  height: 40;
+  background-color: white;
+  opacity: 1;
+  gap: 10px;
+  padding-top: 8px;
+  padding-right: 16px;
+  padding-bottom: 8px;
+  padding-left: 16px;
+}
+.pagination-button {
+  border: 1px solid #f8f6f7;
+  width: 32px;
+  height: 32px;
+  background-color: white;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 14px;
+  color: #212b36;
+  line-height: 20px;
+  letter-spacing: 0;
+  text-align: center;
+  opacity: 1;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.pagination {
+  align-self: center;
+  justify-content: center;
+  display: flex;
+  width: 100%;
+}
+
+.pagination-button.active {
+  background-color:white;
+  border: 1px solid #FF4000;
+  color:#FF4000;
+ 
+}
+.navigBtn{
+    background-color: white;
+    margin:8px;
+}
+.productName{
 font-family: Poppins;
-font-weight:400;
-font-size: 12px;
+font-weight: 500;
+font-style: Medium;
+font-size: 18px;
+color:#10151F;
 line-height: 100%;
 letter-spacing: 0%;
-color:#3E424A;
-}
-
-.filters{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 32px;
-    position: relative;
-}
-
-.align{
-    display: flex;
-    gap:12px;
-    align-self: center;
-}
-
-.priceFilter{
-    max-width:392px;
-}
-.priceInputs{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap:10px;
-}
-
-.priceFilter button{
-    width: 124;
-height: 41;
-gap: 10px;
-background-color: #FF4000;
-color:white;
-opacity: 1;
-border-radius: 10px;
-padding-top: 10px;
-padding-right: 20px;
-padding-bottom: 10px;
-padding-left: 20px;
+margin-top: 12px;
+margin-bottom: 0px !important;
 
 }
-.btn{
-    display: flex;
-    align-items: end;
-    justify-self:end;
-}
-
-.priceFilter{
-    border: 1px solid #E1DFE1;
-    width: 392;
-height: 169;
-gap: 20px;
-background-color: white;
-opacity: 1;
-top: 205px;
-left: 1332px;
-border-width: 1px;
-border-radius: 8px;
-padding: 16px;
-position: absolute;
-top:120%;
-left:68%;
-
-}
-.pricerange h3{
+.priceProduct{
     font-family: Poppins;
-font-weight: 600;
-font-style: SemiBold;
-font-size: 16px;
-color: #10151F;
-margin-bottom: 20px;
+font-weight: 500;
+font-style: Medium;
+font-size: 18px;
+color:#10151F;
 line-height: 100%;
 letter-spacing: 0%;
-
+margin-bottom: 42px;
+margin-top: 2px;
 }
-.filters{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-.groupFilters{
-    display: flex;
-}
-
-.pageCount{
-    width: 190px;
-    border-right: 1px solid #E1DFE1;
-    margin-right: 32px;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-
-}
-.align{
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    margin-right: 32px;
-}
-.groupFilters{
-    display: flex;
-    align-items: center;
-}
-
-.sort-options{
-width: 223;
-height: 184;
-opacity: 1;
-gap: 8px;
-padding-top: 16px;
-padding-bottom: 16px;
-top: 205px;
-left: 1597px;
-border-radius: 8px;
-border-width: 1px;
-background-color:white;
-top:120%;
-left:91%;
-border: 1px solid #E1DFE1;
-position:absolute;
-}
-.sort-options div{
-width: 223;
-height: 40;
-background-color: white;
-opacity: 1;
-gap: 10px;
-padding-top: 8px;
-padding-right: 16px;
-padding-bottom: 8px;
-padding-left: 16px;
-
-}
-
 
 
 
