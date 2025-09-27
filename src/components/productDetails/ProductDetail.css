@@ -1,0 +1,368 @@
+.product-detail {
+    display: flex;
+    gap: 20px;
+    padding: 12px;
+}
+
+
+.detailInfo {
+    width: 1720px;
+    margin: 0 auto;
+
+}
+
+.cover-img {
+    width: 703px;
+    height: 903px;
+
+}
+
+.main-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    border-radius: 10px;
+}
+
+
+
+.product-detail {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 168px;
+}
+
+
+.images .main-image {
+
+    object-fit: contain;
+    box-shadow: 0 0 10px 2px rgb(233, 233, 233);
+
+}
+
+.images {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.decriptionPrdoucts {
+    color: #3E424A;
+    width: 704px;
+    opacity: 1;
+
+}
+
+.swatches button {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin: 4px;
+    border: 1px solid #151414;
+}
+
+button.active {
+    border: 2px solid #000 !important;
+}
+
+.sizes button {
+    margin: 4px;
+    padding: 6px 10px;
+}
+
+.thumbnails {
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-panel {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 380px;
+    height: 100%;
+    background: #fff;
+    box-shadow: -2px 0 8px rgba(0, 0, 0, .15);
+    padding: 12px;
+    overflow: auto;
+}
+
+.cart-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cart-item {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 8px 0;
+}
+
+.listings {
+    font-family: Poppins;
+    font-weight: 300;
+    font-style: Light;
+    font-size: 14px;
+    color: #10151F;
+    line-height: 100%;
+    letter-spacing: 0%;
+    margin-bottom: 49px;
+
+}
+
+.cart-thumb {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+}
+
+.swatches button {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 8px;
+    border: 2px solid rgb(213, 212, 212);
+    cursor: pointer;
+    transition: border 0.2s, transform 0.2s, box-shadow 0.8s;
+}
+
+.swatches button.active-color {
+    border: 2px solid #E1DFE1;
+    transform: scale(1.2);
+
+}
+
+.thumbnails img {
+    max-width: 121px;
+    height: 161px;
+    margin-right: 8px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: border 0.2s, box-shadow 0.2s, transform 0.2s;
+    margin-bottom: 9px;
+    margin-right: 24px;
+    border-radius: 10px;
+
+}
+
+.thumbnails img.active-thumbnail {
+    border: 2px solid black;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    transform: scale(1.05);
+}
+
+.info {
+    width: 704px;
+}
+
+.info h2 {
+    font-family: Poppins;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 32px;
+    color: #10151F;
+    line-height: 100%;
+    letter-spacing: 0%;
+    margin-bottom: 21px;
+
+}
+
+.cost {
+    font-family: Poppins;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 32px;
+    color: #10151F;
+    line-height: 100%;
+    letter-spacing: 0%;
+    margin-bottom: 56px;
+
+}
+
+.size {
+    font-family: Poppins;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 16px;
+    color: #10151F;
+    line-height: 100%;
+    letter-spacing: 0%;
+    margin-top: 48px;
+    margin-bottom: 16px;
+
+}
+
+.color-otions {
+    font-family: Poppins;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 16px;
+    color: #10151F;
+    line-height: 100%;
+    letter-spacing: 0%;
+    margin-bottom: 16px;
+}
+
+.swatches {
+    display: flex;
+    gap: 5px;
+    margin-top: 16px;
+
+
+}
+
+.sizebtns button {
+    border: 1px solid #E1DFE1;
+    width: 70px;
+    height: 42px;
+    color: #10151F;
+    font-family: Poppins;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    width: 70;
+    height: 42;
+    opacity: 1;
+    gap: 10px;
+    padding-top: 9px;
+    padding-right: 16px;
+    padding-bottom: 9px;
+    padding-left: 16px;
+    border-radius: 10px;
+    border-width: 1px;
+    background-color: #ffffff;
+
+
+
+}
+
+.sizebtns {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 48px;
+}
+
+.quantity {
+    font-family: Poppins;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 16px;
+    color: #10151F;
+    line-height: 100%;
+    letter-spacing: 0%;
+    margin-bottom: 16px;
+
+
+}
+
+.quantity-select {
+    width: 70;
+    height: 42;
+    opacity: 1;
+    gap: 10px;
+    border-radius: 10px;
+    border-width: 1px;
+    padding-top: 9px;
+    padding-right: 16px;
+    padding-bottom: 9px;
+    padding-left: 16px;
+    border: 1px solid #E1DFE1;
+    margin-bottom: 56px;
+    margin-top: 16px;
+    color: #10151F;
+    font-weight: 400;
+    font-size: 16px;
+
+}
+
+
+
+.addtoCartBtn {
+    width: 704px;
+    height: 59px;
+    background-color: Red;
+    opacity: 1;
+    gap: 10px;
+    padding-top: 16px;
+    padding-right: 60px;
+    padding-bottom: 16px;
+    padding-left: 60px;
+    border-radius: 10px;
+    display: flex;
+    gap: 4.5px;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    font-family: Poppins;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 18px;
+    line-height: 100%;
+    letter-spacing: 0%;
+
+
+
+}
+
+.line {
+    border: 1px solid #E1DFE1;
+    margin-block: 56px;
+}
+
+.brand {
+    display: flex;
+}
+
+.logobrand {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 704px;
+}
+
+.logobrand img {
+    width: 100px;
+    height: 61px;
+}
+
+.logobrand p {
+    font-family: Poppins;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 20px;
+    color: #10151F;
+    line-height: 100%;
+    letter-spacing: 0%;
+
+
+}
+
+.brand-name {
+    font-family: Poppins;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 16px;
+    color: #3E424A;
+    line-height: 100%;
+    letter-spacing: 0%;
+    margin-bottom: 19px;
+
+}
+
+.decriptionPrdoucts {
+    font-family: Poppins;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 16px;
+    color: #3E424A;
+    line-height: 100%;
+    letter-spacing: 0%;
+    margin-bottom: 140px;
+
+}
+
