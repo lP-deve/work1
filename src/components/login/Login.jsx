@@ -34,7 +34,7 @@ const Login = () => {
                 const errorMessages = Object.values(error.errors).flat().join('\n');
                 setApiError(errorMessages);
             } else if (error.status === 401) {
-                setApiError('Please provide valid API token');
+                setApiError('Please check your email and password.');
             } else if (error.message) {
                 setApiError(error.message);
             } else {
@@ -51,7 +51,7 @@ const Login = () => {
                 <div className="login">
                     <h1>Log in</h1>
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        {/* Email Input */}
+                  
                         <div className="inp">
                             <input
                                 type="email"
@@ -67,7 +67,7 @@ const Login = () => {
                             {errors.email && <p className="error">{errors.email.message}</p>}
                         </div>
 
-                        {/* Password Input with Eye Icon */}
+                       
                         <div className="inp inputWrapper">
                             <input
                                 type={passwordVisible ? 'text' : 'password'}
@@ -89,8 +89,6 @@ const Login = () => {
                             </span>
                         </div>
                         {errors.password && <p className="error">{errors.password.message}</p>}
-
-                        {/* API Error */}
                         {apiError && <p className="error">{apiError}</p>}
 
                         <button type="submit">Log in</button>
