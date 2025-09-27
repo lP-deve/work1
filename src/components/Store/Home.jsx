@@ -90,7 +90,7 @@ const Home = () => {
     setSearchParams(params);
   };
 
-  
+
   const renderPageNumbers = () => {
     const pages = [];
     const maxPagesToShow = 2;
@@ -164,8 +164,8 @@ const Home = () => {
 
   return (
     <>
-      <StoreHeader />
       <section className='store'>
+       
         <div className="filters">
           <h2>Products</h2>
           <div className="groupFilters">
@@ -264,6 +264,7 @@ const Home = () => {
               )}
             </div>
           </div>
+
         </div>
 
         <div className="active-filters" style={{ margin: '20px 0' }}>
@@ -272,18 +273,18 @@ const Home = () => {
               <h4>Active Price Filters:</h4>
               <div
                 className="filter-tags"
-          
+
               >
                 <div
                   className="filter-tag"
                   style={{ display: 'flex', alignItems: 'center', gap: '5px' }}
                 >
-                  {priceFrom && <>From: {priceFrom} ₾</>}
+                  {priceFrom && <>price: {priceFrom}</>}
                   {priceFrom && priceTo && <> - </>}
-                  {priceTo && <>To: {priceTo} ₾</>}
+                  {priceTo && <> {priceTo}</>}
                   <button
                     onClick={removeAllPriceFilters}
-                    
+
                     aria-label="Remove price filters"
                   >
                     ×
@@ -299,9 +300,9 @@ const Home = () => {
         ) : (
           <div className='content'>
             {products.map((product) => (
-             <Link to={`/products/${product.id}`} key={product.id} className="product-card"> <div className='item'>
+              <Link to={`/products/${product.id}`} key={product.id} className="product-card"> <div className='item'>
                 <img src={product.cover_image} alt={product.name} />
-               <p className="productName">{product.name}</p>
+                <p className="productName">{product.name}</p>
                 <p className='priceProduct'>{product.price} ₾</p>
               </div></Link>
             ))}
@@ -327,6 +328,7 @@ const Home = () => {
             <img src="verctor.svg" alt="" />
           </button>
         </div>
+      
       </section>
     </>
   );

@@ -1,8 +1,24 @@
+.store {
+                
+  display: flex;
+  flex-direction: column;
+  max-width: 1720px;
+  width: 100%;
+  margin: 0 auto;
+  
+}
+
 .content {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 24px;
   max-width: 412px;
+  width: 1720px;
+  opacity: 1;
+  top: 247px;
+  left: 100px;
+  gap: 24px;
+
 }
 
 .item {
@@ -12,15 +28,15 @@
   justify-content: center;
 }
 
-h2{
- font-family: Poppins;
-font-weight: 600;
-font-style: SemiBold;
-font-size: 42px;
-color:#10151F;
-line-height: 100%;
-letter-spacing: 0%;
-  
+h2 {
+  font-family: Poppins;
+  font-weight: 600;
+  font-style: SemiBold;
+  font-size: 42px;
+  color: #10151F;
+  line-height: 100%;
+  letter-spacing: 0%;
+
 }
 
 .item p {
@@ -40,13 +56,8 @@ letter-spacing: 0%;
   max-width: 412px;
   height: 549px;
   object-fit: cover;
- border-radius: 10px;
- border:1px solid grey;
-}
-
-.store {
-  width: 1720px;
-  margin: 0 auto;
+  border-radius: 10px;
+  border: 1px solid grey;
 }
 
 .plagination {
@@ -54,7 +65,15 @@ letter-spacing: 0%;
   gap: 12px;
   margin-top: 100px;
   margin-bottom: 216px;
+  text-align: center;
+  padding: 20px 0;
+  border-top: 1px solid #ccc;
+  background: #fff;
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
 }
+
 .pages {
   font-family: Poppins;
   font-weight: 400;
@@ -81,6 +100,7 @@ letter-spacing: 0%;
 .priceFilter {
   max-width: 392px;
 }
+
 .priceInputs {
   display: flex;
   align-items: center;
@@ -101,6 +121,7 @@ letter-spacing: 0%;
   padding-bottom: 10px;
   padding-left: 20px;
 }
+
 .btn {
   display: flex;
   align-items: end;
@@ -121,8 +142,44 @@ letter-spacing: 0%;
   padding: 16px;
   position: absolute;
   top: 120%;
-  left: 68%;
+  left: 67.5%;
 }
+
+.filter-tag {
+  max-width: 161px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 37px;
+  border-radius: 50px;
+  border-width: 1px;
+  margin-top: 19px;
+  margin-bottom: 26px;
+  opacity: 1;
+  top: 234px;
+  left: 100px;
+  padding-top: 8px;
+  padding-right: 10px;
+  padding-bottom: 8px;
+  padding-left: 16px;
+  gap: 6px;
+  border: 1px solid #E1DFE1;
+  font-family: Poppins;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 14px;
+  color: #3E424A;
+  line-height: 100%;
+  letter-spacing: 0%;
+
+}
+
+.filter-tag button {
+  background-color: white;
+
+}
+
 .pricerange h3 {
   font-family: Poppins;
   font-weight: 600;
@@ -133,11 +190,13 @@ letter-spacing: 0%;
   line-height: 100%;
   letter-spacing: 0%;
 }
+
 .filters {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
 .groupFilters {
   display: flex;
 }
@@ -150,12 +209,14 @@ letter-spacing: 0%;
   justify-content: center;
   display: flex;
 }
+
 .align {
   align-items: center;
   display: flex;
   justify-content: center;
   margin-right: 32px;
 }
+
 .groupFilters {
   display: flex;
   align-items: center;
@@ -177,7 +238,9 @@ letter-spacing: 0%;
   left: 91%;
   border: 1px solid #e1dfe1;
   position: absolute;
+
 }
+
 .sort-options div {
   width: 223;
   height: 40;
@@ -185,10 +248,11 @@ letter-spacing: 0%;
   opacity: 1;
   gap: 10px;
   padding-top: 8px;
-  padding-right: 16px;
+  padding-right: 12px;
   padding-bottom: 8px;
   padding-left: 16px;
 }
+
 .pagination-button {
   border: 1px solid #f8f6f7;
   width: 32px;
@@ -215,38 +279,38 @@ letter-spacing: 0%;
 }
 
 .pagination-button.active {
-  background-color:white;
+  background-color: white;
   border: 1px solid #FF4000;
-  color:#FF4000;
- 
-}
-.navigBtn{
-    background-color: white;
-    margin:8px;
-}
-.productName{
-font-family: Poppins;
-font-weight: 500;
-font-style: Medium;
-font-size: 18px;
-color:#10151F;
-line-height: 100%;
-letter-spacing: 0%;
-margin-top: 12px;
-margin-bottom: 0px !important;
+  color: #FF4000;
 
 }
-.priceProduct{
-    font-family: Poppins;
-font-weight: 500;
-font-style: Medium;
-font-size: 18px;
-color:#10151F;
-line-height: 100%;
-letter-spacing: 0%;
-margin-bottom: 42px;
-margin-top: 2px;
+
+.navigBtn {
+  background-color: white;
+  margin: 8px;
 }
 
+.productName {
+  font-family: Poppins;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 18px;
+  color: #10151F;
+  line-height: 100%;
+  letter-spacing: 0%;
+  margin-top: 12px;
+  margin-bottom: 0px !important;
 
+}
 
+.priceProduct {
+  font-family: Poppins;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 18px;
+  color: #10151F;
+  line-height: 100%;
+  letter-spacing: 0%;
+  margin-bottom: 42px;
+  margin-top: 2px;
+}

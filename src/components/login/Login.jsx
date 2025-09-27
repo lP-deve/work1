@@ -19,32 +19,29 @@ const Login = () => {
     const togglePasswordVisibility = () => {
         setPasswordVisible(prev => !prev);
     };
-     
 
-const onSubmit = async (data) => {
-  setApiError('');
-  try {
-    const result = await loginUser(data);
+    const onSubmit = async (data) => {
+        setApiError('');
+        try {
+            const result = await loginUser(data);
 
-    localStorage.setItem('token', result.token);
-    localStorage.setItem('user', JSON.stringify(result.user));
+            localStorage.setItem('token', result.token);
+            localStorage.setItem('user', JSON.stringify(result.user));
 
-    navigate('/store');
-  } catch (error) {
-    if (error.status === 422 && error.errors) {
-      const errorMessages = Object.values(error.errors).flat().join('\n');
-      setApiError(errorMessages);
-    } else if (error.status === 401) {
-      setApiError('Please provide valid API token');
-    } else if (error.message) {
-      setApiError(error.message);
-    } else {
-      setApiError('Login failed. Please try again.');
-    }
-  }
-};
-
-
+            navigate('/store');
+        } catch (error) {
+            if (error.status === 422 && error.errors) {
+                const errorMessages = Object.values(error.errors).flat().join('\n');
+                setApiError(errorMessages);
+            } else if (error.status === 401) {
+                setApiError('Please provide valid API token');
+            } else if (error.message) {
+                setApiError(error.message);
+            } else {
+                setApiError('Login failed. Please try again.');
+            }
+        }
+    };
 
     return (
         <>
@@ -54,6 +51,7 @@ const onSubmit = async (data) => {
                 <div className="login">
                     <h1>Log in</h1>
                     <form onSubmit={handleSubmit(onSubmit)}>
+                        {/* Email Input */}
                         <div className="inp">
                             <input
                                 type="email"
@@ -69,7 +67,8 @@ const onSubmit = async (data) => {
                             {errors.email && <p className="error">{errors.email.message}</p>}
                         </div>
 
-                        <div className="inp" style={{ position: 'relative' }}>
+                        {/* Password Input with Eye Icon */}
+                        <div className="inp inputWrapper">
                             <input
                                 type={passwordVisible ? 'text' : 'password'}
                                 placeholder="password *"
@@ -81,26 +80,17 @@ const onSubmit = async (data) => {
                                     },
                                 })}
                             />
-                            <span
-                                className="toggle-icon"
-                                onClick={togglePasswordVisibility}
-                                style={{
-                                    cursor: 'pointer',
-                                    position: 'absolute',
-                                    right: 10,
-                                    top: '50%',
-                                    transform: 'translateY(-50%)'
-                                }}
-                            >
+                            <span className="toggle-icon" onClick={togglePasswordVisibility}>
                                 <img
                                     src={passwordVisible ? '/hide.png' : '/view.png'}
                                     alt="toggle"
-                                    id={passwordVisible ? 'hide2' : 'see2'}
+                                    className="eye-icon"
                                 />
                             </span>
-                            {errors.password && <p className="error">{errors.password.message}</p>}
                         </div>
+                        {errors.password && <p className="error">{errors.password.message}</p>}
 
+                        {/* API Error */}
                         {apiError && <p className="error">{apiError}</p>}
 
                         <button type="submit">Log in</button>

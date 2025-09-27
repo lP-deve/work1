@@ -8,7 +8,7 @@ export const registerUser = async (formData) => {
       Accept: 'application/json'
     },
     body: JSON.stringify({
-      username: formData.username,             // backend expects "name"
+      username: formData.username,       
       email: formData.email,
       password: formData.password,
       password_confirmation: formData.confirmPassword

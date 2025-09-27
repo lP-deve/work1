@@ -1,4 +1,4 @@
-.login h1{
+/* .login h1{
     margin-bottom: 48px;
 }
 #hide2{
@@ -15,4 +15,35 @@ width: 20px;
 height: 20px;
 top:37%;
 right:3%;
-}
+} */
+
+.inputWrapper {
+    position: relative;
+  }
+  
+  .inputWrapper input {
+    width: 100%;
+    padding-right: 40px; /* Space for icon */
+    box-sizing: border-box;
+  }
+  
+  .toggle-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  
+  .eye-icon {
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+  }
+  
+  .error {
+    color: red;
+    font-size: 0.85rem;
+    margin-top: 4px;
+  }
+  
