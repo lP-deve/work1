@@ -132,6 +132,7 @@ input {
 .emailInput {
     margin-bottom: 20px;
     padding-left: 40px;
+    height:42px;
 }
 
 .email {
@@ -145,9 +146,44 @@ input {
     height: 32px;
 }
 
-.input-error {
-    border: 2px solid red !important;
-    outline: none;
-    transition: border 0.3s ease;
-}
+.emailIcon {
+    position: relative;
+    width: 100%;
+  }
+  
+  .emailIcon .email {
+    position: absolute;
+    top: 31%;               
+    left: 12px;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+  
+  .emailInput {
+    width: 100%;
+    height: 48px;           
+    padding: 10px 12px 10px 40px;  
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box;
+  }
+  
+  .input-error {
+    border-color: #FF4000;
+    margin-bottom: 12px;
+  }
+  
+  .error-wrapper {
+    height: 28px;
+    margin-top: 4px;
+  }
+  
+  .error-text {
+    color: #FF4000;
+    font-size: 14px;
+    font-family: Poppins;
+  }
+  
+
 

@@ -5,11 +5,12 @@ import Cart from "../cartItems/Cart";
 import './checkout.css';
 
 const Checkout = ({ localCart, setLocalCart, setSuccessMessage }) => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
   const onPay = () => {
     setSuccessMessage("Payment successful! Thank you for your order!");
     setLocalCart([]);
+    reset(); 
     setTimeout(() => setSuccessMessage(""), 3000);
   };
 
@@ -29,7 +30,7 @@ const Checkout = ({ localCart, setLocalCart, setSuccessMessage }) => {
                 {...register("name", { required: true })}
                 className={errors.name ? "input-error" : ""}
               />
-              {errors.name && <span style={{ color: "red" }}>Name is required</span>}
+              {errors.name && <span  className="error-text">Name is required</span>}
             </div>
 
             <div className="nameInput">
@@ -39,7 +40,7 @@ const Checkout = ({ localCart, setLocalCart, setSuccessMessage }) => {
                 {...register("surname", { required: true })}
                 className={errors.surname ? "input-error" : ""}
               />
-              {errors.surname && <span style={{ color: "red" }}>Surname is required</span>}
+              {errors.surname && <span className="error-text">Surname is required</span>}
             </div>
           </div>
           <div className="emailIcon">
@@ -59,7 +60,8 @@ const Checkout = ({ localCart, setLocalCart, setSuccessMessage }) => {
               {...register("email", { required: true })}
             />
           </div>
-          {errors.email && <span style={{ color: "red" }}>Email is required</span>}
+          <div className="error-wrapper">{errors.email && <span className="error-text">Email is required</span>}</div>
+          
 
           <div className="address">
             <div className="nameInput">
@@ -69,7 +71,7 @@ const Checkout = ({ localCart, setLocalCart, setSuccessMessage }) => {
                 {...register("address", { required: true })}
                 className={errors.address ? "input-error" : ""}
               />
-              {errors.address && <span style={{ color: "red" }}>Address is required</span>}
+              {errors.address && <span className="error-text">Address is required</span>}
             </div>
 
             <div className="nameInput">
@@ -79,7 +81,7 @@ const Checkout = ({ localCart, setLocalCart, setSuccessMessage }) => {
                 {...register("zip", { required: true })}
                 className={errors.zip ? "input-error" : ""}
               />
-              {errors.zip && <span style={{ color: "red" }}>Zip Code is required</span>}
+              {errors.zip && <span className="error-text">Zip Code is required</span>}
             </div>
           </div>
         </form>
