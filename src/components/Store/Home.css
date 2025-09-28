@@ -310,6 +310,9 @@ h2 {
   margin-bottom: 0px !important;
 
 }
+.sort-selected{
+  cursor: pointer;
+}
 
 .priceProduct {
   font-family: Poppins;
