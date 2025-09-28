@@ -44,8 +44,6 @@ const Register = () => {
       }
     } catch (error) {
       console.error('Registration failed:', error);
-
-      // Assign field-level server-side validation errors
       if (error.errors) {
         Object.entries(error.errors).forEach(([field, messages]) => {
           setError(field, {

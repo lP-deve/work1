@@ -1,25 +1,25 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Cart from "../cartItems/Cart";
+import Modal from "./Modal";
 import './checkout.css';
 
 const Checkout = ({ localCart, setLocalCart, setSuccessMessage }) => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
+  const [showModal, setShowModal] = useState(false);
 
   const onPay = () => {
-    setSuccessMessage("Payment successful! Thank you for your order!");
-    setLocalCart([]);
-    reset(); 
-    setTimeout(() => setSuccessMessage(""), 3000);
+    setLocalCart([]); 
+    reset();           
+    setShowModal(true); 
   };
 
   return (
     <div className="checkoutContainer">
       <h1 className="Checkout">Checkout</h1>
       <div className="formBg">
-   
-        <form className="form" onSubmit={handleSubmit(onPay)} >
+        <form className="form" onSubmit={handleSubmit(onPay)}>
           <p>Order details</p>
 
           <div className="Fullname">
@@ -30,7 +30,7 @@ const Checkout = ({ localCart, setLocalCart, setSuccessMessage }) => {
                 {...register("name", { required: true })}
                 className={errors.name ? "input-error" : ""}
               />
-              {errors.name && <span  className="error-text">Name is required</span>}
+              {errors.name && <span className="error-text">Name is required</span>}
             </div>
 
             <div className="nameInput">
@@ -43,6 +43,7 @@ const Checkout = ({ localCart, setLocalCart, setSuccessMessage }) => {
               {errors.surname && <span className="error-text">Surname is required</span>}
             </div>
           </div>
+
           <div className="emailIcon">
             <svg className="email" width="20" height="20" viewBox="0 0 20 20" fill="none">
               <path
@@ -60,8 +61,9 @@ const Checkout = ({ localCart, setLocalCart, setSuccessMessage }) => {
               {...register("email", { required: true })}
             />
           </div>
-          <div className="error-wrapper">{errors.email && <span className="error-text">Email is required</span>}</div>
-          
+          <div className="error-wrapper">
+            {errors.email && <span className="error-text">Email is required</span>}
+          </div>
 
           <div className="address">
             <div className="nameInput">
@@ -86,12 +88,11 @@ const Checkout = ({ localCart, setLocalCart, setSuccessMessage }) => {
           </div>
         </form>
 
-
         <div className="cartDiv">
           <Cart
             id="cartSidebar"
             isOpen={true}
-            onClose={() => { }}
+            onClose={() => {}}
             localCart={localCart}
             setLocalCart={setLocalCart}
             isCheckout={true}
@@ -100,6 +101,8 @@ const Checkout = ({ localCart, setLocalCart, setSuccessMessage }) => {
           />
         </div>
       </div>
+
+      {showModal && <Modal onClose={() => setShowModal(false)} />}
     </div>
   );
 };
