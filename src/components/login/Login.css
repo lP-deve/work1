@@ -1,31 +1,49 @@
-
 .inputWrapper {
-    position: relative;
-  }
-  
-  .inputWrapper input {
-    width: 100%;
-    padding-right: 40px;
-    box-sizing: border-box;
-  }
-  
-  .toggle-icon {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-  }
-  
-  .eye-icon {
-    width: 20px;
-    height: 20px;
-    pointer-events: none;
-  }
-  
-  .error {
-    color: red;
-    font-size: 0.85rem;
-    margin-top: 4px;
-  }
-  
+  position: relative;
+}
+
+.toggle-icon {
+  position: absolute;
+  right: 10px;
+  top: 40%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.eye-icon {
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+}
+
+.error {
+  color:#FF4000;
+  font-size: 0.85rem;
+  margin-top: 4px;
+  font-family: Poppins;
+font-weight: 400;
+font-style: Regular;
+font-size: 14px;
+
+line-height: 100%;
+letter-spacing: 0%;
+margin-bottom: 12px;
+
+}
+
+.input-error {
+  border: 1px solid #FF4000;
+  margin-bottom: 6px;
+}
+
+.login h1{
+  margin-bottom: 41px;
+  font-family: Poppins;
+font-weight: 600;
+font-style: SemiBold;
+font-size: 42px;
+color:#10151F;
+line-height: 100%;
+letter-spacing: 0%;
+
+}

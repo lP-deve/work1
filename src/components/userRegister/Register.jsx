@@ -11,9 +11,10 @@ const Register = () => {
     register,
     handleSubmit,
     watch,
+    setError,
     formState: { errors }
   } = useForm({
-      defaultValues: {
+    defaultValues: {
       username: '',
       email: '',
       password: '',
@@ -36,17 +37,28 @@ const Register = () => {
   const onSubmit = async (formData) => {
     try {
       const data = await registerUser(formData);
-      console.log('Registered successfully:', data);
-      navigate('/login');
+
+      if (data.token) {
+        localStorage.setItem('token', data.token);
+        navigate('/');
+      }
     } catch (error) {
-      console.error('Registration failed:', error.message);
-      alert(`Registration failed: ${error.message}`);
+      console.error('Registration failed:', error);
+
+      // Assign field-level server-side validation errors
+      if (error.errors) {
+        Object.entries(error.errors).forEach(([field, messages]) => {
+          setError(field, {
+            type: 'server',
+            message: messages[0]
+          });
+        });
+      }
     }
   };
 
   const password = watch('password');
-  const username = watch('username');
-  console.log('WATCH username:', username); 
+
   return (
     <>
       <Header />
@@ -59,11 +71,13 @@ const Register = () => {
 
             <div className="inp1">
               <input
+                className={errors.username ? 'error-input' : ''}
                 type="text"
                 {...register('username', {
                   required: 'Username is required',
                 })}
                 placeholder="Username *"
+                
               />
               {errors.username && <p>{errors.username.message}</p>}
             </div>
@@ -75,10 +89,12 @@ const Register = () => {
                   required: 'Email is required',
                   pattern: {
                     value: /^\S+@\S+$/i,
-                    message: 'Invalid email address'
+                    message: 'Invalid email address',
+                 
                   }
                 })}
-                placeholder="Email *"
+                placeholder="   Email     *"
+                className={errors.email ? 'error-input' : ''}
               />
               {errors.email && <p>{errors.email.message}</p>}
             </div>
@@ -95,10 +111,10 @@ const Register = () => {
                     }
                   })}
                   placeholder="Password *"
-                  className="password-input"
+                  className={`password-input ${errors.password ? 'error-input' : ''}`}
                 />
                 {errors.password && <p>{errors.password.message}</p>}
-                <span className="toggle-icon" onClick={togglePasswordVisibility}>
+                <span className="toggle-icons2" onClick={togglePasswordVisibility}>
                   <img
                     src={passwordVisible ? '/hide.png' : '/view.png'}
                     alt="toggle"
@@ -109,7 +125,7 @@ const Register = () => {
             </div>
 
             <div className="inp1">
-              <div className="password-wrapper">
+              <div className="password-wrappers">
                 <input
                   type={confirmPasswordVisible ? 'text' : 'password'}
                   {...register('confirmPassword', {
@@ -118,12 +134,12 @@ const Register = () => {
                       value === password || 'Passwords do not match'
                   })}
                   placeholder="Confirm Password *"
-                  className="password-input"
+                  className={`password-input ${errors.confirmPassword ? 'error-input' : ''}`}
                 />
                 {errors.confirmPassword && (
                   <p>{errors.confirmPassword.message}</p>
                 )}
-                <span className="toggle-icon" onClick={toggleConfirmPasswordVisibility}>
+                <span className="toggle-icons" onClick={toggleConfirmPasswordVisibility}>
                   <img
                     src={confirmPasswordVisible ? '/hide.png' : '/view.png'}
                     alt="toggle"
@@ -146,6 +162,3 @@ const Register = () => {
 };
 
 export default Register;
-
-
-

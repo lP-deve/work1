@@ -1,5 +1,6 @@
 header {
-    padding: 28px 100px;
+    padding-inline:  100px;
+    height: 80px;
     align-items: center;
     justify-content: space-between;
     display: flex;

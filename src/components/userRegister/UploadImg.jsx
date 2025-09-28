@@ -16,7 +16,7 @@ const UploadImg = () => {
 
   const handleRemoveImage = () => {
     setPreviewUrl(null);
-    setProfileImage(null);
+    setProfileImage('avatar.svg');
   };
 
   return (

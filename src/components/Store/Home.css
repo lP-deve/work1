@@ -239,6 +239,7 @@ h2 {
   border: 1px solid #e1dfe1;
   position: absolute;
 
+
 }
 
 .sort-options div {
@@ -251,6 +252,11 @@ h2 {
   padding-right: 12px;
   padding-bottom: 8px;
   padding-left: 16px;
+  transition: 0.3s;
+}
+.sort-options div:hover {
+  color:#FF4000;
+  cursor: pointer;
 }
 
 .pagination-button {
@@ -276,6 +282,8 @@ h2 {
   justify-content: center;
   display: flex;
   width: 100%;
+  margin-bottom:216px;
+  margin-top: 90px;
 }
 
 .pagination-button.active {

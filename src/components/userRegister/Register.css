@@ -13,6 +13,17 @@ form {
   width: 554px;
   position: relative;
 }
+
+.registration h1{
+  font-family: Poppins;
+font-weight: 600;
+font-style: SemiBold;
+font-size: 42px;
+color:#10151F;
+line-height: 100%;
+letter-spacing: 0%;
+
+}
 input {
   width: 100%;
   height: 42px;
@@ -49,7 +60,7 @@ margin-bottom: 24px;
 
 }
 
-inp{
+.inp{
     display: flex;
     flex-direction: column;
     margin-bottom: 6px;
@@ -79,43 +90,6 @@ margin-left: 8px;
 
 }
 
-
-#see{
-  width: 20px;
-  height: 20px;
-  position:absolute;
-    top:59%;
-  right:3%;
-
-}
-#see1{
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  top:73%;
-  right:3%;
-
-}
-
-#hide{
-  width: 20px;
-  height: 20px;
-  position: absolute;
-
-    top:59%;
-  right:3%;
-  
-
-}
-#hide1{
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  top:73%;
-  right:3%;
-}
-
-
 input::placeholder {
   background: linear-gradient(to right, black 23%, red 23%);
   -webkit-background-clip: text;
@@ -125,6 +99,72 @@ input::placeholder {
   font-size: 16px;
   font-weight: 500;
 }
+
+.error-input {
+  border: 1px solid red !important;
+  outline: none;
+  margin-bottom: 6px;
+}
+
+.inp1 p {
+  color: red;
+  font-size: 14px;
+  font-family: Poppins;
+  margin-bottom: 12px;
+
+}
+
+.password-wrappers{
+  position: relative;
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+}
+
+.password-input {
+  width: 100%;
+  padding-right: 40px; 
+  box-sizing: border-box;
+
+}
+
+.toggle-icons{
+  position: absolute;
+  right: 10px;
+  top: 30%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  height: 24px;
+  width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toggle-icons2{
+  position: absolute;
+  right: 10px;
+  top: 48%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  height: 24px;
+  width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toggle-icons img{
+  height: 20px;
+  width: 20px;
+}
+.toggle-icons2 img{
+  height: 20px;
+  width: 20px;
+}
+
+
+
 
 
 

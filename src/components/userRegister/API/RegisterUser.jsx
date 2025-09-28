@@ -8,7 +8,7 @@ export const registerUser = async (formData) => {
       Accept: 'application/json'
     },
     body: JSON.stringify({
-      username: formData.username,       
+      username: formData.username,
       email: formData.email,
       password: formData.password,
       password_confirmation: formData.confirmPassword
@@ -18,9 +18,8 @@ export const registerUser = async (formData) => {
   const data = await response.json();
 
   if (!response.ok) {
-   
     throw data;
   }
 
-  return data; 
+  return data;
 };
