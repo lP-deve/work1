@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Cart from "../cartItems/Cart";
@@ -10,9 +9,9 @@ const Checkout = ({ localCart, setLocalCart, setSuccessMessage }) => {
   const [showModal, setShowModal] = useState(false);
 
   const onPay = () => {
-    setLocalCart([]); 
-    reset();           
-    setShowModal(true); 
+    setLocalCart([]);
+    reset();
+    setShowModal(true);
   };
 
   return (
@@ -58,11 +57,17 @@ const Checkout = ({ localCart, setLocalCart, setSuccessMessage }) => {
               className={`emailInput ${errors.email ? "input-error" : ""}`}
               type="email"
               placeholder="Email"
-              {...register("email", { required: true })}
+              {...register("email", {
+                required: "Email is required",
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  message: "Invalid email address"
+                }
+              })}
             />
           </div>
           <div className="error-wrapper">
-            {errors.email && <span className="error-text">Email is required</span>}
+            {errors.email && <span className="error-text">{errors.email.message}</span>}
           </div>
 
           <div className="address">
@@ -80,10 +85,16 @@ const Checkout = ({ localCart, setLocalCart, setSuccessMessage }) => {
               <input
                 type="text"
                 placeholder="Zip Code"
-                {...register("zip", { required: true })}
+                {...register("zip", {
+                  required: "Zip Code is required",
+                  pattern: {
+                    value: /^[0-9]{3,10}$/,
+                    message: "Zip Code must be numbers at least 3 digits"
+                  }
+                })}
                 className={errors.zip ? "input-error" : ""}
               />
-              {errors.zip && <span className="error-text">Zip Code is required</span>}
+              {errors.zip && <span className="error-text">{errors.zip.message}</span>}
             </div>
           </div>
         </form>

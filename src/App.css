@@ -31,11 +31,12 @@ html, body {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    -webkit-text-fill-color: transparent;
     font-size: 16px;
     font-weight: 700;
     max-width: 310px;
   }
-  
+  input:focus{
+    background-color: white;
+  }
   
   
