@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Cart from "../cartItems/Cart";
 import Modal from "./Modal";
-import './checkout.css';
+import "./Checkout.css"
 
 const Checkout = ({ localCart, setLocalCart, setSuccessMessage }) => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
