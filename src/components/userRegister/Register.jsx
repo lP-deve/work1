@@ -91,7 +91,7 @@ const Register = () => {
                  
                   }
                 })}
-                placeholder="   Email     *"
+                placeholder=" Email     *"
                 className={errors.email ? 'error-input' : ''}
               />
               {errors.email && <p>{errors.email.message}</p>}

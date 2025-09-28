@@ -33,7 +33,7 @@ html, body {
     color: transparent;
     font-size: 16px;
     font-weight: 700;
-    max-width: 310px;
+    max-width: 305px;
   }
   input:focus{
     background-color: white;

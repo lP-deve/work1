@@ -19,7 +19,7 @@ const Header = () => {
 
   return (
     <header>
-      <div className="logo">
+      <div className="logo" onClick={()=>navigate('/login')}>
         <img src="HandEye.svg" alt="logo" />
         <p>RedSeam Clothing</p>
       </div>
